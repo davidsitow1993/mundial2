@@ -11,8 +11,16 @@ export function generateStaticParams() {
   return generateFixtures().map((f) => ({ id: f.id }));
 }
 
-export default async function MatchPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function MatchPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ captura?: string }>;
+}) {
   const { id } = await params;
+  const { captura } = await searchParams;
+  const modoCaptura = captura === "1";
   const fixture = generateFixtures().find((f) => f.id === id);
   if (!fixture) notFound();
 
@@ -41,15 +49,30 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
 
   return (
     <div className="flex flex-1 flex-col">
-      <SiteHeader updatedAt={updatedAt} />
-      <DisclaimerBanner />
+      {!modoCaptura && <SiteHeader updatedAt={updatedAt} />}
+      {!modoCaptura && <DisclaimerBanner />}
       <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-10">
-        <Link
-          href={`/grupo/${fixture.group}`}
-          className="font-data mb-4 inline-block text-xs uppercase tracking-wider text-muted hover:text-accent"
-        >
-          &larr; Grupo {fixture.group} / Jornada {fixture.matchday}
-        </Link>
+        {!modoCaptura && (
+          <div className="mb-4 flex items-center justify-between">
+            <Link
+              href={`/grupo/${fixture.group}`}
+              className="font-data inline-block text-xs uppercase tracking-wider text-muted hover:text-accent"
+            >
+              &larr; Grupo {fixture.group} / Jornada {fixture.matchday}
+            </Link>
+            <Link
+              href={`/partido/${fixture.id}?captura=1`}
+              className="font-data inline-block text-xs uppercase tracking-wider text-muted hover:text-accent"
+            >
+              Modo captura &rarr;
+            </Link>
+          </div>
+        )}
+        {modoCaptura && (
+          <div className="font-data mb-4 text-center text-[10px] uppercase tracking-[0.3em] text-accent">
+            MUNDIAL26 // IA PREDICTOR
+          </div>
+        )}
 
         <div className="mb-10 grid grid-cols-3 items-center gap-4 border border-border bg-surface py-8 text-center">
           <div>
@@ -146,6 +169,12 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
             ))}
           </Section>
         </div>
+
+        {modoCaptura && (
+          <div className="mt-8 text-center font-data text-[10px] uppercase tracking-wider text-muted">
+            Analisis estadistico de entretenimiento. No es asesoria de apuestas.
+          </div>
+        )}
       </main>
     </div>
   );
