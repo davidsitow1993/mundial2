@@ -90,6 +90,7 @@ export type SimulationResult = {
   championCounts: Record<string, number>;
   goldenBootCounts: Record<string, { name: string; teamId: string; count: number }>;
   groupWinnerCounts: Record<string, Record<string, number>>;
+  groupRunnerUpCounts: Record<string, Record<string, number>>;
   iterations: number;
 };
 
@@ -108,8 +109,12 @@ export function simulateTournament(iterations = 10000, seed = 42): SimulationRes
   const championCounts: Record<string, number> = {};
   const goldenBootCounts: Record<string, { name: string; teamId: string; count: number }> = {};
   const groupWinnerCounts: Record<string, Record<string, number>> = {};
+  const groupRunnerUpCounts: Record<string, Record<string, number>> = {};
 
-  for (const g of GROUPS) groupWinnerCounts[g] = {};
+  for (const g of GROUPS) {
+    groupWinnerCounts[g] = {};
+    groupRunnerUpCounts[g] = {};
+  }
 
   for (let iter = 0; iter < iterations; iter++) {
     const qualified: Team[] = [];
@@ -122,6 +127,8 @@ export function simulateTournament(iterations = 10000, seed = 42): SimulationRes
 
       groupWinnerCounts[g][standings[0].team.id] =
         (groupWinnerCounts[g][standings[0].team.id] ?? 0) + 1;
+      groupRunnerUpCounts[g][standings[1].team.id] =
+        (groupRunnerUpCounts[g][standings[1].team.id] ?? 0) + 1;
     }
 
     // Best 8 third-placed teams advance (32-team knockout bracket).
@@ -152,5 +159,5 @@ export function simulateTournament(iterations = 10000, seed = 42): SimulationRes
     goldenBootCounts[key].count += 1;
   }
 
-  return { championCounts, goldenBootCounts, groupWinnerCounts, iterations };
+  return { championCounts, goldenBootCounts, groupWinnerCounts, groupRunnerUpCounts, iterations };
 }
