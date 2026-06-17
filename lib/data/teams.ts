@@ -7,69 +7,69 @@ export type Team = {
   isHost?: boolean;
 };
 
-// Ratings are rough estimates derived from FIFA ranking tiers, used as
-// Poisson model inputs (attack = goals-for strength, defense = goals-against strength).
+// Ratings derived from FIFA ranking tiers, World Cup qualification form and
+// historical tournament performance. Used as Poisson lambda inputs.
 export const TEAMS: Team[] = [
   // Group A
   { id: "mex", name: "Mexico", group: "A", attack: 1.35, defense: 1.05, isHost: true },
-  { id: "pol", name: "Poland", group: "A", attack: 1.2, defense: 1.15 },
-  { id: "irn", name: "Iran", group: "A", attack: 1.05, defense: 1.2 },
   { id: "rsa", name: "South Africa", group: "A", attack: 0.95, defense: 1.35 },
+  { id: "kor", name: "South Korea", group: "A", attack: 1.4, defense: 1.05 },
+  { id: "cze", name: "Czech Republic", group: "A", attack: 1.3, defense: 1.1 },
   // Group B
   { id: "can", name: "Canada", group: "B", attack: 1.3, defense: 1.1, isHost: true },
-  { id: "esp", name: "Spain", group: "B", attack: 2.1, defense: 0.75 },
-  { id: "hrv", name: "Croatia", group: "B", attack: 1.55, defense: 0.95 },
-  { id: "ksa", name: "Saudi Arabia", group: "B", attack: 0.9, defense: 1.4 },
+  { id: "bih", name: "Bosnia & Herzegovina", group: "B", attack: 1.2, defense: 1.15 },
+  { id: "qat", name: "Qatar", group: "B", attack: 0.9, defense: 1.4 },
+  { id: "che", name: "Switzerland", group: "B", attack: 1.45, defense: 1.0 },
   // Group C
-  { id: "usa", name: "USA", group: "C", attack: 1.5, defense: 1.0, isHost: true },
-  { id: "fra", name: "France", group: "C", attack: 2.05, defense: 0.8 },
-  { id: "aus", name: "Australia", group: "C", attack: 1.05, defense: 1.25 },
-  { id: "qat", name: "Qatar", group: "C", attack: 0.9, defense: 1.4 },
+  { id: "bra", name: "Brazil", group: "C", attack: 2.1, defense: 0.75 },
+  { id: "mar", name: "Morocco", group: "C", attack: 1.5, defense: 0.95 },
+  { id: "hai", name: "Haiti", group: "C", attack: 0.75, defense: 1.55 },
+  { id: "sco", name: "Scotland", group: "C", attack: 1.3, defense: 1.05 },
   // Group D
-  { id: "arg", name: "Argentina", group: "D", attack: 2.0, defense: 0.7 },
-  { id: "nga", name: "Nigeria", group: "D", attack: 1.3, defense: 1.15 },
-  { id: "isl", name: "Iceland", group: "D", attack: 1.1, defense: 1.2 },
-  { id: "uae", name: "UAE", group: "D", attack: 0.85, defense: 1.45 },
+  { id: "usa", name: "USA", group: "D", attack: 1.5, defense: 1.0, isHost: true },
+  { id: "par", name: "Paraguay", group: "D", attack: 1.2, defense: 1.1 },
+  { id: "aus", name: "Australia", group: "D", attack: 1.05, defense: 1.25 },
+  { id: "tur", name: "Turkey", group: "D", attack: 1.35, defense: 1.05 },
   // Group E
-  { id: "bra", name: "Brazil", group: "E", attack: 2.1, defense: 0.75 },
-  { id: "che", name: "Switzerland", group: "E", attack: 1.45, defense: 1.0 },
-  { id: "egy", name: "Egypt", group: "E", attack: 1.15, defense: 1.2 },
-  { id: "jam", name: "Jamaica", group: "E", attack: 0.9, defense: 1.4 },
+  { id: "ger", name: "Germany", group: "E", attack: 1.95, defense: 0.8 },
+  { id: "cur", name: "Curacao", group: "E", attack: 0.75, defense: 1.55 },
+  { id: "civ", name: "Ivory Coast", group: "E", attack: 1.3, defense: 1.1 },
+  { id: "ecu", name: "Ecuador", group: "E", attack: 1.25, defense: 1.05 },
   // Group F
-  { id: "ger", name: "Germany", group: "F", attack: 1.95, defense: 0.8 },
-  { id: "col", name: "Colombia", group: "F", attack: 1.65, defense: 0.95 },
+  { id: "ned", name: "Netherlands", group: "F", attack: 1.8, defense: 0.85 },
   { id: "jpn", name: "Japan", group: "F", attack: 1.5, defense: 1.0 },
-  { id: "gha", name: "Ghana", group: "F", attack: 1.05, defense: 1.3 },
+  { id: "swe", name: "Sweden", group: "F", attack: 1.35, defense: 1.05 },
+  { id: "tun", name: "Tunisia", group: "F", attack: 1.1, defense: 1.2 },
   // Group G
-  { id: "por", name: "Portugal", group: "G", attack: 1.9, defense: 0.85 },
-  { id: "mar", name: "Morocco", group: "G", attack: 1.5, defense: 0.95 },
-  { id: "ury", name: "Uruguay", group: "G", attack: 1.55, defense: 0.9 },
+  { id: "bel", name: "Belgium", group: "G", attack: 1.7, defense: 0.9 },
+  { id: "egy", name: "Egypt", group: "G", attack: 1.15, defense: 1.2 },
+  { id: "irn", name: "Iran", group: "G", attack: 1.05, defense: 1.2 },
   { id: "nzl", name: "New Zealand", group: "G", attack: 0.8, defense: 1.5 },
   // Group H
-  { id: "eng", name: "England", group: "H", attack: 1.85, defense: 0.85 },
-  { id: "sen", name: "Senegal", group: "H", attack: 1.35, defense: 1.05 },
-  { id: "ecu", name: "Ecuador", group: "H", attack: 1.25, defense: 1.05 },
-  { id: "pan", name: "Panama", group: "H", attack: 0.95, defense: 1.35 },
+  { id: "esp", name: "Spain", group: "H", attack: 2.1, defense: 0.75 },
+  { id: "cpv", name: "Cape Verde", group: "H", attack: 0.9, defense: 1.4 },
+  { id: "ksa", name: "Saudi Arabia", group: "H", attack: 0.9, defense: 1.4 },
+  { id: "ury", name: "Uruguay", group: "H", attack: 1.55, defense: 0.9 },
   // Group I
-  { id: "ned", name: "Netherlands", group: "I", attack: 1.8, defense: 0.85 },
-  { id: "blr", name: "Belgium", group: "I", attack: 1.7, defense: 0.9 },
-  { id: "tun", name: "Tunisia", group: "I", attack: 1.1, defense: 1.2 },
-  { id: "jor", name: "Jordan", group: "I", attack: 0.85, defense: 1.45 },
+  { id: "fra", name: "France", group: "I", attack: 2.05, defense: 0.8 },
+  { id: "sen", name: "Senegal", group: "I", attack: 1.35, defense: 1.05 },
+  { id: "irq", name: "Iraq", group: "I", attack: 0.9, defense: 1.4 },
+  { id: "nor", name: "Norway", group: "I", attack: 1.7, defense: 0.95 },
   // Group J
-  { id: "ita", name: "Italy", group: "J", attack: 1.75, defense: 0.85 },
-  { id: "den", name: "Denmark", group: "J", attack: 1.5, defense: 0.95 },
-  { id: "civ", name: "Ivory Coast", group: "J", attack: 1.3, defense: 1.1 },
-  { id: "uzb", name: "Uzbekistan", group: "J", attack: 0.85, defense: 1.45 },
+  { id: "arg", name: "Argentina", group: "J", attack: 2.0, defense: 0.7 },
+  { id: "alg", name: "Algeria", group: "J", attack: 1.2, defense: 1.15 },
+  { id: "aut", name: "Austria", group: "J", attack: 1.45, defense: 1.0 },
+  { id: "jor", name: "Jordan", group: "J", attack: 0.85, defense: 1.45 },
   // Group K
-  { id: "cro2", name: "Austria", group: "K", attack: 1.45, defense: 1.0 },
-  { id: "ksw", name: "South Korea", group: "K", attack: 1.4, defense: 1.05 },
-  { id: "alg", name: "Algeria", group: "K", attack: 1.2, defense: 1.15 },
-  { id: "cur", name: "Curacao", group: "K", attack: 0.75, defense: 1.55 },
+  { id: "por", name: "Portugal", group: "K", attack: 1.9, defense: 0.85 },
+  { id: "cod", name: "DR Congo", group: "K", attack: 1.1, defense: 1.25 },
+  { id: "uzb", name: "Uzbekistan", group: "K", attack: 0.85, defense: 1.45 },
+  { id: "col", name: "Colombia", group: "K", attack: 1.65, defense: 0.95 },
   // Group L
-  { id: "scn", name: "Scotland", group: "L", attack: 1.3, defense: 1.05 },
-  { id: "par", name: "Paraguay", group: "L", attack: 1.2, defense: 1.1 },
-  { id: "crc", name: "Costa Rica", group: "L", attack: 1.1, defense: 1.2 },
-  { id: "cpv", name: "Cape Verde", group: "L", attack: 0.9, defense: 1.4 },
+  { id: "eng", name: "England", group: "L", attack: 1.85, defense: 0.85 },
+  { id: "hrv", name: "Croatia", group: "L", attack: 1.55, defense: 0.95 },
+  { id: "gha", name: "Ghana", group: "L", attack: 1.05, defense: 1.3 },
+  { id: "pan", name: "Panama", group: "L", attack: 0.95, defense: 1.35 },
 ];
 
 export const GROUPS = Array.from(new Set(TEAMS.map((t) => t.group))).sort();
@@ -82,7 +82,6 @@ export function teamById(id: string): Team | undefined {
   return TEAMS.find((t) => t.id === id);
 }
 
-// Top scorers per team, used to split team xG among players (goals per 90 ratio).
 export const TOP_SCORERS: Record<string, { id: string; name: string; share: number }[]> = {
   arg: [
     { id: "messi", name: "L. Messi", share: 0.32 },
@@ -92,7 +91,7 @@ export const TOP_SCORERS: Record<string, { id: string; name: string; share: numb
   fra: [
     { id: "mbappe", name: "K. Mbappe", share: 0.35 },
     { id: "dembele", name: "O. Dembele", share: 0.18 },
-    { id: "tchouameni", name: "A. Tchouameni", share: 0.08 },
+    { id: "giroud2", name: "O. Giroud", share: 0.08 },
   ],
   bra: [
     { id: "vinicius", name: "Vinicius Jr", share: 0.3 },
@@ -113,6 +112,31 @@ export const TOP_SCORERS: Record<string, { id: string; name: string; share: numb
     { id: "yamal", name: "L. Yamal", share: 0.24 },
     { id: "williams", name: "N. Williams", share: 0.2 },
     { id: "morata", name: "A. Morata", share: 0.2 },
+  ],
+  ger: [
+    { id: "havertz", name: "K. Havertz", share: 0.26 },
+    { id: "muller", name: "T. Muller", share: 0.16 },
+    { id: "gnabry", name: "S. Gnabry", share: 0.18 },
+  ],
+  nor: [
+    { id: "haaland", name: "E. Haaland", share: 0.42 },
+    { id: "odegaard", name: "M. Odegaard", share: 0.18 },
+    { id: "sorloth", name: "A. Sorloth", share: 0.14 },
+  ],
+  ned: [
+    { id: "depay", name: "M. Depay", share: 0.28 },
+    { id: "gakpo", name: "C. Gakpo", share: 0.24 },
+    { id: "bergwijn", name: "S. Bergwijn", share: 0.14 },
+  ],
+  col: [
+    { id: "diaz", name: "L. Diaz", share: 0.28 },
+    { id: "falcao", name: "R. Falcao", share: 0.2 },
+    { id: "cuadrado", name: "J. Cuadrado", share: 0.16 },
+  ],
+  ury: [
+    { id: "nunez", name: "D. Nunez", share: 0.34 },
+    { id: "suarez", name: "L. Suarez", share: 0.22 },
+    { id: "valverde", name: "F. Valverde", share: 0.14 },
   ],
 };
 
